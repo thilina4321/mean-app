@@ -1,0 +1,22 @@
+<mat-accordion multi="true">
+  <ng-container *ngIf="posts.length > 0">
+    <mat-expansion-panel *ngFor="let post of posts">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ post.title }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      {{ post.description }}
+
+      <mat-action-row>
+        <button (click)="onEdit(post._id)"
+         mat-raised-button color="primary">Edit</button>
+        <button (click)="onDelete(post._id)" mat-raised-button color="warn">
+          Delete
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </ng-container>
+
+  <p *ngIf="posts.length == 0">No posts yet</p>
+</mat-accordion>
