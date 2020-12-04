@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms'
+import {ReactiveFormsModule} from '@angular/forms'
 import {HttpClientModule} from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,7 @@ import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './header/header.component';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     MaterialModule,
     HttpClientModule,
+    ReactiveFormsModule,
+
 
   ],
   providers: [],

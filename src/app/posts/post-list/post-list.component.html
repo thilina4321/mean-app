@@ -6,6 +6,9 @@
           {{ post.title }}
         </mat-panel-title>
       </mat-expansion-panel-header>
+      <div class="image">
+        <img [src]="post.imageUrl">
+      </div>
       {{ post.description }}
 
       <mat-action-row>

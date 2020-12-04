@@ -13,8 +13,12 @@ export class PostService {
   private posts: Post[] = [];
   private posts$ = new Subject<Post[]>();
 
-  addPosts(title: string, description: string) {
-    const post = { title, description };
+  addPosts(title: string, description: string, image: File) {
+    // const post = { title, description };
+    const post = new FormData();
+    post.append('title', title);
+    post.append('description', description);
+    post.append('image', image, title);
     this.http
       .post<Post>('http://localhost:3000/posts', post)
       .subscribe((post) => {
@@ -32,17 +36,28 @@ export class PostService {
     return this.posts$.asObservable();
   }
 
-  findPostToEdit(id:string|undefined){
-    return this.http.get<Post>('http://localhost:3000/posts/'+id)
+  findPostToEdit(id: string | undefined) {
+    return this.http.get<Post>('http://localhost:3000/posts/' + id);
   }
 
-  onEditPost(post:Post){
-    this.http.patch('http://localhost:3000/posts/' + post._id, post).subscribe(()=>{
-      console.log('Congratulation you did it');
-      this.router.navigate(['/posts']);
+  onEditPost(post: Post) {
+    let updatePost: Post | FormData;
+    if (typeof post.imageUrl == 'object') {
+      console.log('koolaa ow');
 
-
-    })
+      updatePost = new FormData();
+      updatePost.append('title', post.title);
+      updatePost.append('description', post.description);
+      updatePost.append('image', post.imageUrl, post.title);
+    } else {
+      updatePost = post;
+    }
+    this.http
+      .patch('http://localhost:3000/posts/' + post._id, updatePost)
+      .subscribe(() => {
+        console.log('Congratulation you did it');
+        this.router.navigate(['/posts']);
+      });
   }
 
   deletePost(id: string | undefined) {

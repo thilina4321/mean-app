@@ -1,20 +1,43 @@
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
 
   <mat-card>
     <mat-form-field>
       <mat-label> Title </mat-label>
-      <input matInput name="title"
+      <input formControlName="title"
+      #title
+      matInput name="title"
        [ngModel]="post?.title"
-       #title="ngModel">
+       >
+       <mat-error *ngIf="form.controls.title.invalid && form.touched"> Title is required </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label> Content </mat-label>
-      <input matInput name="description"
+      <input formControlName="description"
+      #description
+      matInput name="description"
       [ngModel]="post?.description"
+        >
+        <mat-error *ngIf="form.controls.description.invalid && form.touched"> Description is required </mat-error>
 
-        #description="ngModel">
     </mat-form-field>
+
+    <input (change)="onImageChange($event)"
+
+    type="file" #pickImage>
+    <div class="image">
+
+      <button type="button" (click)="pickImage.click()"
+      mat-stroked-button  > Image </button>
+    </div>
+
+    <mat-error>Shoud be image</mat-error>
+
+    <div class="image__pre" *ngIf="imagePreview">
+      <img
+      [src]="imagePreview">
+    </div>
 
     <div class="div">
       <button mat-raised-button color="primary"> Save </button>

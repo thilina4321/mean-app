@@ -13,4 +13,21 @@ mat-form-field{
   text-align: right;
 }
 
+input[type="file"]{
+  visibility: hidden;
+}
 
+.image{
+  text-align: left;
+}
+
+
+.image__pre{
+  height: 5rem;
+  margin-top: 1rem;
+
+}
+
+img{
+  height: 100%;
+}
